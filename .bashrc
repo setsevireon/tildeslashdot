@@ -48,9 +48,10 @@ function print_path() {
 function config_defaults() {
 	# history
 	shopt -s histappend
-	export HISTCONTROL=ignoreboth
-	export HISTSIZE=10000
-	export HISTFILESIZE=100000
+	HISTCONTROL=ignoreboth
+	HISTSIZE=10000
+	HISTFILESIZE=100000
+	PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 
 	# check window size conrtinuously
 	shopt -s checkwinsize
