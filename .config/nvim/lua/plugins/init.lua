@@ -54,11 +54,6 @@ return require("packer").startup(function(use)
 		end,
 		run = function()
 			require("nvim-lsp-installer").install("sumneko_lua")
-			--			":LspInstall sumneko_lua",
-			--			":LspInstall pyright",
-			--			":LspInstall bashls",
-			--			":LspInstall yamlls",
-			--			":LspInstall rust_analyzer",
 		end,
 	})
 end)
