@@ -158,9 +158,30 @@ function config_go() {
 	export PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
 }
 
+################################################################################
+# Setup environment for Rust
+# Globals:
+#   HOME
+#   PATH
+#   GOPATH
+# Arguments:
+#   $1 - prefix or "unset" | default = ~/.cargo
+# shellcheck disable=SC2120
+################################################################################
+function config_rust() {
+	if [[ "$1" == "unset" ]]; then
+		remove_from_path "${CARGO_HOME}/bin"
+		return
+	fi
+
+	export CARGO_HOME="${1:-${HOME}/.cargo}"
+	export PATH="${CARGO_HOME}/bin:${PATH}"
+}
+
 # main -------------------------------------------------------------------------
 config_defaults
 config_aliases
 config_completion
 config_homebrew
 config_go
+config_rust
