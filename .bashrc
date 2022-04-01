@@ -178,6 +178,24 @@ function config_rust() {
 	export CARGO_HOME="${1:-${HOME}/.cargo}"
 	export PATH="${CARGO_HOME}/bin:${PATH}"
 }
+################################################################################
+# Setup environment for PHP
+# Globals:
+#   HOME
+#   PATH
+# Arguments:
+#   $1 - "unset" (optional)
+# shellcheck disable=SC2120
+################################################################################
+function config_php() {
+	if [[ "$1" == "unset" ]]; then
+		remove_from_path "${HOME}/.config/composer/vendor/bin"
+		return
+	fi
+
+	export PATH+=":${HOME}/.config/composer/vendor/bin"
+}
+
 
 # main -------------------------------------------------------------------------
 config_defaults
@@ -186,3 +204,4 @@ config_completion
 config_homebrew
 config_go
 config_rust
+config_php
