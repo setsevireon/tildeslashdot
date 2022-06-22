@@ -209,12 +209,17 @@ function config_php() {
 function config_pyton() {
 	if [[ "$1" == "unset" ]]; then
 		remove_from_path "${PYENV_ROOT}/bin:${PATH}"
+		remove_from_path "${HOME}/.poetry/bin"
 		return
 	fi
 
+	# pyenv
 	export PYENV_ROOT="${HOME}/.pyenv"
 	command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:${PATH}"
 	eval "$(pyenv init -)"
+
+	# Poetry
+	export PATH="${HOME}/.poetry/bin:${PATH}"
 
 }
 
