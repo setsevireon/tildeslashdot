@@ -178,6 +178,7 @@ function config_rust() {
 	export CARGO_HOME="${1:-${HOME}/.cargo}"
 	export PATH="${CARGO_HOME}/bin:${PATH}"
 }
+
 ################################################################################
 # Setup environment for PHP
 # Globals:
@@ -196,6 +197,27 @@ function config_php() {
 	export PATH+=":${HOME}/.config/composer/vendor/bin"
 }
 
+################################################################################
+# Setup environment for Python
+# Globals:
+#   HOME
+#   PATH
+# Arguments:
+#   $1 - "unset" (optional)
+# shellcheck disable=SC2120
+################################################################################
+function config_pyton() {
+	if [[ "$1" == "unset" ]]; then
+		remove_from_path "${PYENV_ROOT}/bin:${PATH}"
+		return
+	fi
+
+	export PYENV_ROOT="${HOME}/.pyenv"
+	command -v pyenv >/dev/null || export PATH="${PYENV_ROOT}/bin:${PATH}"
+	eval "$(pyenv init -)"
+
+}
+
 
 # main -------------------------------------------------------------------------
 config_defaults
@@ -205,3 +227,4 @@ config_homebrew
 config_go
 config_rust
 config_php
+config_pyton
