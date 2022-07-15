@@ -223,6 +223,19 @@ function config_pyton() {
 
 }
 
+################################################################################
+# Setup environment for Javascript
+# Globals:
+#   HOME
+# shellcheck disable=SC2120
+################################################################################
+function config_javascript() {
+	export NVM_DIR="${HOME}/.nvm"
+	# shellcheck source=.nvm/nvm.sh
+	[ -s "${NVM_DIR}/nvm.sh" ] && source "${NVM_DIR}/nvm.sh"
+	# shellcheck source=.nvm/bash_completion
+	[ -s "${NVM_DIR}/bash_completion" ] && source "${NVM_DIR}/bash_completion"
+}
 
 # main -------------------------------------------------------------------------
 config_defaults
@@ -233,3 +246,4 @@ config_go
 config_rust
 config_php
 config_pyton
+config_javascript
